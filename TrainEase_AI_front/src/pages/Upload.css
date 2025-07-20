@@ -1,0 +1,110 @@
+/* src/pages/Upload.css */
+
+.upload-page {
+  padding: 40px;
+  max-width: 800px;
+  margin: auto;
+  font-family: sans-serif;
+}
+
+.upload-page h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 32px;
+}
+
+.upload-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background-color: #f9fafb;
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+.upload-section,
+.avatar-section,
+.voice-section {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+input[type="file"],
+select {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.generate-btn {
+  display: flex;
+  justify-content: center;
+}
+
+.generate-btn button {
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #4F46E5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.generate-btn button:hover {
+  background-color: #3730A3;
+}
+/* Add this below your existing Upload.css content */
+
+.drop-box {
+  border: 2px dashed #4F46E5;
+  padding: 40px;
+  border-radius: 12px;
+  text-align: center;
+  background-color: #f3f4f6;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.drop-box:hover {
+  background-color: #e5e7eb;
+}
+
+.choose-btn {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 10px 20px;
+  background-color: #4F46E5;
+  color: white;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.file-name {
+  margin-top: 12px;
+  font-weight: bold;
+  color: #111827;
+}
+.slide-block {
+  margin-bottom: 24px;
+}
+
+.slide-block textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-family: sans-serif;
+  font-size: 1rem;
+}

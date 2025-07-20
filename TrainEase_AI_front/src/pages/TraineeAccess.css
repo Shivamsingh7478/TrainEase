@@ -1,0 +1,43 @@
+/* src/pages/TraineeAccess.css */
+
+.trainee-access {
+  padding: 40px;
+  max-width: 500px;
+  margin: auto;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.trainee-access h2 {
+  margin-bottom: 24px;
+}
+
+.trainee-access form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.trainee-access input {
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.trainee-access button {
+  padding: 12px;
+  font-size: 1rem;
+  background-color: #4F46E5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.error {
+  margin-top: 16px;
+  color: #ef4444;
+  font-weight: 500;
+}

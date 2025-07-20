@@ -1,0 +1,82 @@
+/* src/pages/Dashboard.css */
+
+.dashboard {
+  padding: 40px;
+  font-family: sans-serif;
+}
+
+.dashboard h2 {
+  font-size: 2rem;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.video-card {
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.video-card:hover {
+  transform: translateY(-4px);
+}
+
+.video-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.video-details {
+  padding: 16px;
+}
+
+.video-details h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: #1f2937;
+}
+
+.video-details p {
+  font-size: 0.95rem;
+  margin: 4px 0;
+  color: #374151;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.view-btn,
+.share-btn,
+.delete-btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  color: white;
+}
+
+.view-btn {
+  background-color: #4F46E5;
+}
+
+.share-btn {
+  background-color: #10b981;
+}
+
+.delete-btn {
+  background-color: #ef4444;
+}
