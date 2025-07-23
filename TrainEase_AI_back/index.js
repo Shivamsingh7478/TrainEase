@@ -5,6 +5,11 @@ const fs = require("fs");
 const path = require("path");
 const extractPPTText = require("./pptParser");
 const generateNarration = require("./generateNarration");
+const ejs = require('ejs');
+const cookieParser = require('cookie-parser');
+const connectDB = require('./config/db');
+connectDB();
+const authRouter = require('./routes/auth');
 
 
 const app = express();
@@ -13,6 +18,10 @@ const PORT = 5000;
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.urlencoded({ extended: true })); // for form POSTs
 
 // Ensure uploads folder exists
 const uploadFolder = path.join(__dirname, "uploads");
@@ -90,6 +99,8 @@ app.post("/generate-narration", async (req, res) => {
   }
 });
 
+app.use('/api/auth', authRouter);
+console.log('✅ [ROUTES] /api/auth routes loaded');
 
 
 // Server start

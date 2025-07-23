@@ -74,6 +74,7 @@ const VideoGenerator = ({ narrationText }) => {
         <div>
           <h3 className="text-lg font-semibold mb-2">🎥 Your Combined Video:</h3>
           <video src={videoURL} controls className="rounded shadow-md" />
+          
         </div>
       )}
     </div>
