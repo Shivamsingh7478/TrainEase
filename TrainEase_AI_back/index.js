@@ -10,6 +10,9 @@ const cookieParser = require('cookie-parser');
 const connectDB = require('./config/db');
 connectDB();
 const authRouter = require('./routes/auth');
+const imageRoutes = require("./routes/image.routes");
+
+
 
 
 const app = express();
@@ -52,7 +55,33 @@ app.post("/upload-ppt", upload.single("pptFile"), async (req, res) => {
     const slides = await extractPPTText(req.file.path);
     console.log("✅ Slides extracted:", slides.length);
 
-    res.json({ success: true, slides });
+    // Extract images using Python script and wait for completion
+    const { exec } = require("child_process");
+    const pptxPath = req.file.path;
+    const outputDir = path.join(__dirname, "public", "images");
+    await new Promise((resolve) => {
+      exec(`python ppt-image-extractor/extract_images.py ${pptxPath} ${outputDir}`,
+        (err, stdout, stderr) => {
+          if (err) {
+            console.error("[IMG EXTRACTION ERROR]", err.message);
+          }
+          if (stdout) {
+            console.log("[IMG EXTRACTION STDOUT]", stdout);
+          }
+          if (stderr) {
+            console.error("[IMG EXTRACTION STDERR]", stderr);
+          }
+          resolve();
+        }
+      );
+    });
+
+    // Build image URLs for each slide
+    const slidesWithImages = slides.map(slide => ({
+      ...slide,
+      imageUrl: `http://localhost:5000/images/slide${slide.slide}_img3.png`
+    }));
+    res.json({ success: true, slides: slidesWithImages });
   } catch (err) {
     console.error("❌ Error during extraction:", err.message);
     res.status(500).json({ success: false, message: "Failed to extract PPT text" });
@@ -102,6 +131,15 @@ app.post("/generate-narration", async (req, res) => {
 app.use('/api/auth', authRouter);
 console.log('✅ [ROUTES] /api/auth routes loaded');
 
+app.use("/api/images", imageRoutes);
+// Serve static images with no cache and log requests
+app.use("/images", (req, res, next) => {
+  const imgPath = path.join(__dirname, "public", "images", req.path);
+  console.log(`[STATIC IMG] Request for: ${imgPath}`);
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  next();
+});
+app.use("/images", express.static(path.join(__dirname, 'public', 'images')));
 
 // Server start
 app.listen(PORT, () => {

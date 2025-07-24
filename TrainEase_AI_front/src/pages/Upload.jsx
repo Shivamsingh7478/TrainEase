@@ -64,7 +64,7 @@ export default function Upload() {
     console.log("Slides to send to AI:", slides);
 
     // 👇 Redirect to narration page and send slide data via router state
-    navigate("/narration", {
+    navigate("/home/narration", {
       state: {
         slides,
       },
@@ -118,6 +118,8 @@ export default function Upload() {
             {slides.map((slide, index) => (
               <div key={index} className="slide-block">
                 <h4>Slide {slide.slide}</h4>
+                {/* Slide image (img3 only, hide if not loaded) */}
+                <SlideImage imageUrl={slide.imageUrl || `http://localhost:5000/images/slide${slide.slide}_img3.png`} slideNum={slide.slide} />
                 <textarea
                   value={slide.text}
                   onChange={(e) => handleSlideChange(index, e.target.value)}
@@ -132,4 +134,23 @@ export default function Upload() {
       </div>
     </div>
   );
+}
+
+function SlideImage({ imageUrl, slideNum }) {
+  const [loaded, setLoaded] = useState(true);
+  if (!imageUrl) return null;
+  return loaded ? (
+    <img
+      src={imageUrl}
+      alt={`Slide ${slideNum}`}
+      style={{
+        maxWidth: "300px",
+        display: "block",
+        marginBottom: "12px",
+        borderRadius: "8px",
+        border: "1px solid #ccc"
+      }}
+      onError={() => setLoaded(false)}
+    />
+  ) : null;
 }
